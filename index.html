@@ -1,9 +1,160 @@
+
+
+<!-- This is the code from our Reassure-->
 <!DOCTYPE html>
-<html>
-<body>
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+<html lang="en">
+<head>
+    <title> Knowledge App </title>
 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--DEPENDENCIES:-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+
+    <link rel="stylesheet" href="../Styles/style.css">
+    <script src="../Scripts/script.js"></script>
+    <script src="../Scripts/serverInterface.js"></script>
+
+    <script>
+        var keys = [];
+
+        function loadpage(){
+            var cardParent = document.getElementById("requests");
+            initHelp();
+            console.log("loaded page");
+        }
+
+        function replace(i){
+            var userReq = document.getElementById("req" + (i + 1));
+            var req = getAPost();
+        //alert(req[0]);
+        //alert(req[1]);
+        //console.log(req.keey);
+            userReq.innerHTML = req.value;
+            keys[i] = req.keey;
+        }
+
+        function dothis(){
+            keys.length = 0;
+            for(var i = 0; i < 3; i++){
+            var userReq = document.getElementById("req" + (i + 1));
+            var req = getAPost();
+            //alert(req[0]);
+            //alert(req[1]);
+            //maybe returning an array is a bad idea?
+            //console.log(req.keey);
+            userReq.innerHTML = req.value;
+            keys.push(req.keey);
+            }
+        }
+    </script>
+</head>
+
+
+
+<body onload="loadpage()">
+
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="opennav" class="menu">&#9776; Menu</span> <!-- this i think contains the code to reopen it-->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Respond to an article </a>
+        <a href="#">Read articles</a>
+    </div>
+
+    <section class="container-fluid row justify-content-center">
+
+        <h3>
+            Read articles, and discuss them.
+        </h3>
+    </section>
+    <section class="container-fluid row justify-content-center">
+        <p id="desc">
+            Our goal is to encourage student discussion during the pandemic by having
+            students read Wikipedia articles on modern topics and have them respond to it.
+ 
+
+            Press start/refresh to get the links to the articles
+        </p>
+    </section>
+
+    <section class="container-fluid row" id="requests">
+        <div class="col card" id="card1">
+            <h1>
+                Write your response here!
+            </h1>
+            <p id="req1">the request of other users</p>
+
+            <form onsubmit="writeResponse(keys[0], reply1); replace(0); return false" method="POST">
+                <div>
+                    <textarea name="reply1" id="reply1"></textarea>
+                </div>
+                <div>
+                    <input type="submit" class="submit" value="Send" onclick="removeCard(this)" />
+                </div>
+            </form>
+        </div>
+
+        <div class="col card" id="card2">
+            <h1>
+                Write your response here!
+            </h1>
+            <p id="req2">the request of other users</p>
+            <form onsubmit="writeResponse(keys[1], reply2); replace(1); return false" method="POST">
+                <div>
+                    <textarea name="reply2" id="reply2"></textarea>
+                </div>
+                <div>
+                    <input type="submit" class="submit" value="Send" />
+                </div>
+            </form>
+        </div>
+
+        <div class="col card" id="card3">
+            <h1>
+                Write your response here!
+            </h1>
+            <p id="req3">the request of other users</p>
+            <form onsubmit="writeResponse(keys[2], reply3); replace(2); return false" method="POST">
+                <div>
+                    <textarea name="reply3" id="reply3"></textarea>
+                </div>
+                <div>
+                    <input type="submit" class="submit" value="Send" />
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div id="align-cent">
+        <button type="button" onclick="dothis()">
+            Start/Refresh
+        </button>
+    </div>
 </body>
 </html>
