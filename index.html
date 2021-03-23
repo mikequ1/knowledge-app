@@ -37,7 +37,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
 
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../knowledge-app/styles/style.css">
     <script src="../scripts/client.js"></script>
     <script src="../scripts/server.js"></script>
 
@@ -86,7 +86,6 @@
         <a href="index.html">Respond to an article </a>
         <a href="#">Read articles</a>
     </div>
-    
 
     <section class="container-fluid row justify-content-center">
 
@@ -105,55 +104,48 @@
     <section class="container-fluid row" id="requests">
         <div class="col card" id="card1">
             <h1>
-                Write your response here!
+                Article title:
             </h1>
-            <p id="req1">the request of other users</p>
 
-            <form onsubmit="writeResponse(keys[0], reply1); replace(0); return false" method="POST">
-                <div>
-                    <textarea name="reply1" id="reply1"></textarea>
-                </div>
-                <div>
-                    <input type="submit" class="submit" value="Send" onclick="removeCard(this)" />
-                </div>
-            </form>
+            <p> Replace this with the article preview.</p>
+
+            <a href ="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
+            
         </div>
 
         <div class="col card" id="card2">
             <h1>
-                Write your response here!
+                Article title:
             </h1>
-            <p id="req2">the request of other users</p>
-            <form onsubmit="writeResponse(keys[1], reply2); replace(1); return false" method="POST">
-                <div>
-                    <textarea name="reply2" id="reply2"></textarea>
-                </div>
-                <div>
-                    <input type="submit" class="submit" value="Send" />
-                </div>
-            </form>
+            <p> Replace this with the article preview.</p>
+            <a href="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
         </div>
+    </section>
 
+    <section class="container-fluid row" id="requests">
         <div class="col card" id="card3">
             <h1>
-                Write your response here!
+                Article title:
             </h1>
-            <p id="req3">the request of other users</p>
-            <form onsubmit="writeResponse(keys[2], reply3); replace(2); return false" method="POST">
-                <div>
-                    <textarea name="reply3" id="reply3"></textarea>
-                </div>
-                <div>
-                    <input type="submit" class="submit" value="Send" />
-                </div>
-            </form>
+            <p> Replace this with the article preview.</p>
+            <a href="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
+        </div>
+
+        <div class="col card" id="card4">
+            <h1>
+                Article title:
+            </h1>
+
+            <p> Replace this with the article preview.</p>
+            <a href="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
         </div>
     </section>
 
     <div id="align-cent">
         <button type="button" onclick="dothis()">
-            Start/Refresh
+            Refresh
         </button>
     </div>
+    
 </body>
 </html>
