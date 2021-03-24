@@ -1,11 +1,8 @@
-
-
-<!-- This is the webpage to read articles-->
 <!DOCTYPE html>
 
 <html lang="en">
 <head>
-    <title> Knowledge App </title>
+    <title>Knowledge App</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,40 +37,41 @@
     <link rel="stylesheet" href="../knowledge-app/styles/style.css">
     <script src="../knowledge-app/scripts/client.js"></script>
     <script src="../knowledge-app/scripts/server.js"></script>
-
     <script>
         var keys = [];
 
-        function loadpage(){
-            var cardParent = document.getElementById("requests");
-            initHelp();
-            console.log("loaded page");
-        }
-
-        function replace(i){
-            var userReq = document.getElementById("req" + (i + 1));
-            var req = getAPost();
-        //alert(req[0]);
-        //alert(req[1]);
-        //console.log(req.keey);
-            userReq.innerHTML = req.value;
-            keys[i] = req.keey;
-        }
-
-        function dothis(){
-            keys.length = 0;
-            for(var i = 0; i < 3; i++){
-            var userReq = document.getElementById("req" + (i + 1));
-            var req = getAPost();
-            //alert(req[0]);
-            //alert(req[1]);
-            //maybe returning an array is a bad idea?
-            //console.log(req.keey);
-            userReq.innerHTML = req.value;
-            keys.push(req.keey);
+            function loadpage(){
+                var cardParent = document.getElementById("requests");
+                initHelp();
+                console.log("loaded page");
             }
-        }
+            
+            function replace(i){
+                var userReq = document.getElementById("req" + (i + 1));
+                    var req = getAPost();
+                    //alert(req[0]);
+                    //alert(req[1]);
+                    
+                    //console.log(req.keey);
+                    userReq.innerHTML = req.value;
+                    keys[i] = req.keey;
+            }
+
+            function dothis(){
+                keys.length = 0;
+                for(var i = 0; i < 3; i++){
+                    var userReq = document.getElementById("req" + (i + 1));
+                    var req = getAPost();
+                    //alert(req[0]);
+                    //alert(req[1]);
+                    //maybe returning an array is a bad idea?
+                    //console.log(req.keey);
+                    userReq.innerHTML = req.value;
+                    keys.push(req.keey);
+                }  
+            }
     </script>
+    
 </head>
 
 
@@ -83,62 +81,65 @@
     <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="opennav" class="menu">&#9776; Menu</span> <!-- this i think contains the code to reopen it-->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="addPost.html">Respond to an article </a>
+        <a href="addPost.html">Respond to an article</a>
         <a href="index.html">Read articles</a>
-        <a href="respondToPost.html">Respond to other posts</a>
+        <a href="respondToPost.html">Respond to other posts post</a>
     </div>
 
     <section class="container-fluid row justify-content-center">
-
-        <h3>
-            Read articles, and discuss them.
-        </h3>
     </section>
+
     <section class="container-fluid row justify-content-center">
         <p id="desc">
-            Our goal is to encourage student discussion during the pandemic by having
-            students read Wikipedia articles on modern topics and have them respond to it.
-            Press start/refresh to get the links to the articles
+            Respond to other's posts
         </p>
     </section>
-
+    
     <section class="container-fluid row" id="requests">
         <div class="col card" id="card1">
             <h1>
-                Article title:
+                Write your response here!
             </h1>
+            <p id="req1">the request of other users</p>
 
-            <p> Replace this with the article preview.</p>
-
-            <a href ="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
-            
+            <form onsubmit="writeResponse(keys[0], reply1); replace(0); return false" method="POST">
+                <div>
+                    <textarea name="reply1" id="reply1"></textarea>
+                </div>
+                <div>
+                    <input type="submit" class="submit" value="Send" onclick="removeCard(this)" />
+                </div>
+            </form>
         </div>
 
         <div class="col card" id="card2">
             <h1>
-                Article title:
+                Write your response here!
             </h1>
-            <p> Replace this with the article preview.</p>
-            <a href="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
+            <p id="req2">the request of other users</p>
+            <form onsubmit="writeResponse(keys[1], reply2); replace(1); return false" method="POST">
+                <div>
+                    <textarea name="reply2" id="reply2"></textarea>
+                </div>
+                <div>
+                    <input type="submit" class="submit" value="Send" />
+                </div>
+            </form>
         </div>
-    </section>
 
-    <section class="container-fluid row" id="requests">
         <div class="col card" id="card3">
             <h1>
-                Article title:
+                Write your response here!
             </h1>
-            <p> Replace this with the article preview.</p>
-            <a href="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
-        </div>
-
-        <div class="col card" id="card4">
-            <h1>
-                Article title:
-            </h1>
-
-            <p> Replace this with the article preview.</p>
-            <a href="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
+            <p id="req3">the request of other users</p>
+            <form onsubmit="writeResponse(keys[2], reply3); replace(2); return false" method="POST">
+                <div>
+                    <textarea name="reply3" id="reply3"></textarea>
+                </div>
+                <div>
+                    <input type="submit" class="submit" value="Send" />
+                </div>
+            </form>
         </div>
     </section>
 
@@ -147,6 +148,5 @@
             Refresh
         </button>
     </div>
-    
 </body>
 </html>

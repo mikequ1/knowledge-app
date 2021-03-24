@@ -11,10 +11,11 @@ const firebaseConfig = {
     measurementId: "G-LM9K85ED21"
 };
 
+
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
-var firebase = firebase.database();
+var database = firebase.database();
 
 var reqKeyArr = [];
 var reqStrArr = [];
@@ -33,6 +34,40 @@ var myReq;
 //some notes:
 //"taele" input is the HTML element of the text box, NOT the direct string value
 
+//Clear (delete) current request
+function clearReq() 
+{
+    myKey = null;
+    myReq = null;
+    myStorage.clear();
+    //TODO: clear all responses
+}
+
+//Initialize "need help" interface (on page load)
+//A user's request is stored client-side on his/her computer
+function initReq() 
+{
+    myKey = myStorage.keyy;
+    myReq = myStorage.msg;
+    //TODO: Disply myReq, with HTML
+    if(myReq != null)
+        document.getElementById("request").value = myReq;
+    if (myKey != null && myReq != null)
+    {
+        getResponses(myKey);
+    }
+    window.setInterval(function(){
+    if (myKey != null && myReq != null) //ahh np im trying to figure out a way to make the page keep refreshing like live updates of responses
+    {//Oh I'm sorry, got confused. What is the need for repeatedly calling getResponses? oh ok. We might need to clear the previous responses then yep we should probably do that
+        getResponses(myKey);
+    }},1000);
+}
+
+//Initialize "help others" interface (on page load)
+function initHelp() 
+{
+    getPosts();
+}
 
 //writes a new post
 function writeNewPost(taele)
@@ -48,8 +83,50 @@ function writeNewPost(taele)
     
     localStorage.setItem('keyy', newPostKey); //remember my key
     localStorage.setItem('msg', str); //remember my post
-
+    console.log("Wrote a new post");
     initReq();
+}
+
+//Generates a post randomly
+//TODO: display this post in a card with HTML/JS magic
+function getAPost()
+{
+  var randint = Math.floor(Math.random() * reqKeyArr.length);
+  var mykey = reqKeyArr[randint];
+  console.log(mykey);
+  console.log(reqKeyArr);
+  var myStr = reqStrArr[randint];
+  //console.log(mykey); 
+  console.log(myStr);
+  //alert(String(myKey)); //try this function maybe
+  //alert(myStr);
+  var keey = mykey;
+  var value = myStr;
+  
+  return {keey, value};
+}
+
+//Gets a request string given its key (only applies to "i need help" posts)
+function getReq(key)
+{
+  var ref = firebase.database().ref("posts");
+  ref.on("value", function(snapshot) {
+  var childData = snapshot.val();         
+  console.log(childData[key].req);
+  });
+}
+
+//Removes a request given its key
+function removeReq(key)
+{
+  var ref = firebase.database().ref('posts/' + key);
+  ref.remove()
+  .then(function() {
+  console.log("Remove succeeded.")
+  })
+  .catch(function(error) {
+    console.log("Remove failed: " + error.message)
+  });
 }
 
 
@@ -86,6 +163,7 @@ function writeResponse(key, taele)
 {
     str = taele.value;
     var newres = firebase.database().ref('posts/' + key).push();
+    console.log("Response written");
     newres.set(str);
 }
 
