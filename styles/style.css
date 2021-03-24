@@ -1,0 +1,164 @@
+
+body {
+    /*background-image: url('image');*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #FABC3C; /*nice pic*/
+    background-image:url("https://i.imgur.com/1uvK7nu.png");
+}
+
+button {
+    background-color: #4CAF50;
+    border:none;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    transition: 0.4s;
+    width: 150px;
+    height: 50px;
+    
+}
+
+#align-cent{
+    text-align: center;
+}
+
+button:hover{
+    background-color: #009905;
+    transition: 0.4s;
+}
+
+#desc{
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+p {
+    font-size: 18px;
+    text-align: center;
+}
+
+.card {
+    background-color:#ffeebb;
+    text-align: center;
+    margin-left: 1%;
+    margin-bottom: 2%;
+    padding-bottom: 20px;
+    border-radius: 25px;
+    transition: 0.4s;
+    box-shadow: 2.5px 2.5px 10px rgb(71, 71, 71);
+    min-width: 300px;
+}
+
+.card:hover {
+    background-color:#ffe082;
+    transition: 0.4s;
+    box-shadow: 5px 5px 10px rgb(43, 43, 43);
+}
+
+.replies {
+    background-color:#ffeebb;
+    text-align: center;
+    margin-left: 1%;
+    margin-bottom: 2%;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    transition: 0.4s;
+    box-shadow: 2.5px 2.5px 10px rgb(71, 71, 71);
+    width: 100%; 
+}
+
+.replies:hover {
+    background-color:#ffe082;
+    transition: 0.4s;
+    box-shadow: 5px 5px 10px rgb(43, 43, 43);
+}
+
+form
+{
+    text-align:center;
+}
+
+textarea {
+    /*color: white;*/
+    background-color:rgb(255, 255, 255); 
+    resize: none;
+    width:80%;
+    height: 200px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.submit {
+    background-color: #ffc1b6;
+    border:none;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    transition: 0.4s;
+}
+
+.submit:hover{
+    background-color: #fd8671;
+    transition: 0.4s;
+}
+
+.menu
+{
+    margin-top:3px;
+    margin-left:3px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(15, 15, 15);  /* change this color */
+    box-shadow: 5px 0 10px rgb(0, 0, 0);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+ .sidenav a:hover {
+     color: #f1f1f1;
+ }
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.websitetitle
+{
+    text-align: center;
+    size:50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
