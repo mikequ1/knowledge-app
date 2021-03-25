@@ -1,0 +1,22 @@
+3/25
+
+Priority key:
+*** for high priority
+** for medium priority
+* for low priority
+
+DONE:
+-***front end for messaging
+-***firebase back end for messaging
+-***site setup and navigation
+
+IN PROGRESS:
+-***webscraping back end (almost done)
+-***webscraping front end (almost done)
+-**firebase backend for login
+-***formatting (css, colors, background etc.)
+
+TODO:
+- **front end for login
+- **chat filtering (maybe if we have time)
+- *login personal dashboard and scoreboard etc
