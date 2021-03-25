@@ -187,6 +187,8 @@ function getPosts()
 //allows a user to write a response
 function writeResponse(key, taele) 
 {
+    if (key == null)
+        return;
     str = taele.value;
     var newres = firebase.database().ref('posts/' + key).push();
     console.log("Response written");
