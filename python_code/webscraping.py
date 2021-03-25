@@ -61,11 +61,14 @@ def get_links(topic, url_used):
     links = []
     
     # Grab 20 Search results 
-    for j in search(topic, tld="co.in", num=20, stop=20, pause=1):
+    for google_link in search(topic, tld="co.in", num=20, stop=20, pause=1):
         # Check the link off link filter and append to list
         for selected_link in link_filter: 
-            if j.find(selected_link) != -1: 
-                links.append(j)
+            if google_link.find(selected_link) != -1:
+                if url_used in selected_link: 
+                    continue
+                else:  
+                    links.append(google_link)
 
     return links
     
@@ -89,7 +92,7 @@ def get_wikipedia_scraping(topic):
         # Grab the URL from the Wikipedia Page
         get_url = page.url
         info.append(get_url)
-    
+
     # return Zero if an Index Error occurs
     except IndexError: 
         return 0 
@@ -104,4 +107,16 @@ def check_json(json_line):
         if json_line in topic:
             topics.remove(topic)
 
-get_topics_json()
+
+#def input_links(all_links, list_thing):
+    #get_side_links = page_info.find_all('div', class_="sidebar-list-content mw-collapsible-content")
+#        for namelink in get_side_links:
+#            namelink = wikipedia_link + str(namelink.text.strip())
+#            print(namelink)
+#            if namelink in info[2]:
+#                #print(namelink.text.strip())
+#                continue
+#        else: 
+#            info[2] = info[2] + " " + namelink
+
+get_wikipedia_scraping("Communism")

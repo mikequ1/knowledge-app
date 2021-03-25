@@ -51,7 +51,7 @@ function initReq()
     myReq = myStorage.msg;
     //TODO: Disply myReq, with HTML
     if(myReq != null)
-        document.getElementById("request").value = myReq;
+        document.getElementById("description").innerHTML = myReq;
     if (myKey != null && myReq != null)
     {
         getResponses(myKey);
@@ -72,6 +72,7 @@ function initHelp()
 //writes a new post
 function writeNewPost(taele)
 {
+
     var str = taele.value;
     var postData = {req: str,};
 
@@ -83,8 +84,12 @@ function writeNewPost(taele)
     
     localStorage.setItem('keyy', newPostKey); //remember my key
     localStorage.setItem('msg', str); //remember my post
+    localStorage.setItem("submit_msg", "Post Submitted: " + str);
     console.log("Wrote a new post");
+
     initReq();
+
+    taele.value = ''; // Empty the Text Box
 }
 
 //Generates a post randomly
