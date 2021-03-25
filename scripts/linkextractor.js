@@ -1,19 +1,56 @@
 var xhr = new XMLHttpRequest();
 var url = "https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch='New_England_Patriots'";
 xhr.open('GET', url, true);
+var x = []
+var y = []
+var data;
 xhr.onload = function() {
-    var data = JSON.parse(this.response);
+    data = JSON.parse(this.response);
     console.log(data);
 
     // Log the page objects
-    console.log(data.query.pages)
+    console.log(data.query.pages);
+
+    //var stringArr = []
 
     for (var i in data.query.pages) 
     {
         console.log(data.query.pages[i].title);
+        //stringArr.push(i);
+        
     }
+
+   // for(var j = 0; j < 4; j++){
+       // var index = Math.floor(Math.random() * stringArr.length);
+       // x.push(data.query.pages[stringArr[index]].title);
+    //}
 }
 xhr.send();
+
+function myFunc(){
+    // Log the page objects
+    console.log(data.query.pages);
+
+    var stringArr = []
+
+    for (var i in data.query.pages) 
+    {
+        console.log(data.query.pages[i].title);
+        console.log(data.query.pages[i]);
+        stringArr.push(i);
+        
+    }
+    x = [];
+    y = [];
+    for(var j = 0; j < 4; j++){
+        var index = Math.floor(Math.random() * stringArr.length);
+        x.push(data.query.pages[stringArr[index]].title);
+        var titleurl = data.query.pages[stringArr[index]].title;
+        titleurl = titleurl.replace(" ","_");
+        titleurl = "https://en.wikipedia.org/wiki/" + titleurl;
+        y.push(titleurl);
+    }
+}
 
 
 const container = document.querySelector("#mw-pages");

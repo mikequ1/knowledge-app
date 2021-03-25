@@ -40,6 +40,7 @@
     <link rel="stylesheet" href="../knowledge-app/styles/style.css">
     <script src="../knowledge-app/scripts/client.js"></script>
     <script src="../knowledge-app/scripts/server.js"></script>
+    <script src="../knowledge-app/scripts/linkextractor.js"></script>
 
     <script>
         var keys = [];
@@ -62,15 +63,22 @@
 
         function dothis(){
             keys.length = 0;
-            for(var i = 0; i < 3; i++){
-            var userReq = document.getElementById("req" + (i + 1));
-            var req = getAPost();
+            myFunc();
+            for(var i = 0; i < 4; i++){
+              var userReq = document.getElementById("header" + (i + 1));
+              console.log(x);
+              var req = x;
+           //var req = getAPost();
             //alert(req[0]);
             //alert(req[1]);
             //maybe returning an array is a bad idea?
             //console.log(req.keey);
-            userReq.innerHTML = req.value;
-            keys.push(req.keey);
+            var newTitle = "Article title: " + req[i];
+            userReq.innerHTML = newTitle;
+
+            var linkReq = document.getElementById("link"+(i+1));
+            linkReq.href = y[i];
+            //keys.push(req.keey);
             }
         }
     </script>
@@ -104,41 +112,41 @@
 
     <section class="container-fluid row" id="requests">
         <div class="col card" id="card1">
-            <h1>
+            <h1 id="header1">
                 Article title:
             </h1>
 
             <p> Replace this with the article preview.</p>
 
-            <a href ="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
+            <a id="link1" href ="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
             
         </div>
 
         <div class="col card" id="card2">
-            <h1>
+            <h1 id="header2">
                 Article title:
             </h1>
             <p> Replace this with the article preview.</p>
-            <a href="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
+            <a id="link2" href="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
         </div>
     </section>
 
     <section class="container-fluid row" id="requests">
         <div class="col card" id="card3">
-            <h1>
+            <h1 id="header3">
                 Article title:
             </h1>
             <p> Replace this with the article preview.</p>
-            <a href="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
+            <a id="link3" href="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles" >Link to the article</a>
         </div>
 
         <div class="col card" id="card4">
-            <h1>
+            <h1 id="header4">
                 Article title:
             </h1>
 
             <p> Replace this with the article preview.</p>
-            <a href="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
+            <a id="link4" href="https://en.wikipedia.org/wiki/University_of_California,_Los_Angeles">Link to the article</a>
         </div>
     </section>
 
