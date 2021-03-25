@@ -48,13 +48,7 @@
 </head>
 
 <body onload="loadindex()">
-    <div>
-        <h1 class=websitetitle>
-            <span class="color:#ffc1b6">Knowledge App</span>
-        </h1>
-    </div>
-    <span style="font-size:20px;cursor:pointer" onclick="openNav()" id="opennav" class="menu">&#9776; Menu</span>
-
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="opennav" class="menu">&#9776; Menu</span> <!-- this i think contains the code to reopen it-->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="addPost.html">Respond to an article </a>
@@ -62,21 +56,29 @@
         <a href="respondToPost.html">Respond to other posts</a>
     </div>
 
+    <div>
+        <h1 class=websitetitle>
+            <span class="color:#ffc1b6">Knowledge App</span>
+        </h1>
+    </div>
 
-    <section class="container-fluid row" id="replies">
+    <section class="container-fluid row" id="sendreq">
         <div class="col card">
             <h1 id="description">
                 Write a post to your favorite article here!
             </h1>
-            <form onsubmit="writeNewPost(request);return false" method="POST">
+            <form>
                 <div>
                     <textarea name="request" id="request"></textarea>
                 </div>
                 <div>
-                    <input type="submit" class="submit" value="Send" />
+                    <button type="button" class="submit" onclick="writeNewPost(request);return false"> submit </button>
+                    <button type="button" class="submit" onclick="removeReq()"> remove </button>
                 </div>
             </form>
         </div>
+    </section>
+    <section class="container-fluid row" id="replies">
     </section>
 </body>
 </html>
