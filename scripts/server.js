@@ -91,7 +91,8 @@ function initHelp()
 //writes a new post
 function writeNewPost(taele)
 {
-
+    if (myStorage.keyy != null && myStorage.msg != null)
+        return;
     var str = taele.value;
     var postData = {req: str,};
 
@@ -107,8 +108,18 @@ function writeNewPost(taele)
     console.log("Wrote a new post");
 
     initReq();
+}
 
-    //taele.value = ''; // Empty the Text Box
+//ADMIN: write a new post to firebase (not constrained by user limitations)
+function writeNewPostStr(str)
+{
+    var postData = {req: str,};
+
+    var newPostKey = firebase.database().ref().child('posts').push().key; //makes a new (anonymous) key that stores the post
+    var updates = {};
+    updates['/posts/' + newPostKey] = postData;
+
+    firebase.database().ref().update(updates);
 }
 
 //Generates a post randomly
