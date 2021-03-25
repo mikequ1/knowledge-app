@@ -49,6 +49,8 @@
             
             function replace(i){
                 var userReq = document.getElementById("req" + (i + 1));
+                var userRep = document.getElementById("reply" + (i + 1));
+                userRep.value = "";
                     var req = getAPost();
                     if (req.keyy == null && req.value == null){
                         console.log("can't get any posts")
@@ -66,14 +68,16 @@
                 keys.length = 0;
                 for(var i = 0; i < 3; i++){
                     var userReq = document.getElementById("req" + (i + 1));
+                    var userRep = document.getElementById("reply" + (i + 1));
+                    userRep.value = "";
                     var req = getAPost();
                     if (req.keyy == null && req.value == null){
                         console.log("can't get any posts")
                         userReq.innerHTML = "*No posts yet, check back in a bit! :)"
-                        document.getElementById("reply" + (i + 1)).disabled = true;
+                        userRep.disabled = true;
                     }
                     else{
-                        document.getElementById("reply" + (i + 1)).disabled = false;
+                        userRep.disabled = false;
                         userReq.innerHTML = req.value;
                         keys.push(req.keey);
                     }
@@ -85,7 +89,7 @@
 
 
 
-<body onload="loadpage()">
+<body onload="loadpage(); setTimeout(dothis,500)">
 
     <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="opennav" class="menu">&#9776; Menu</span> <!-- this i think contains the code to reopen it-->
     <div id="mySidenav" class="sidenav">
