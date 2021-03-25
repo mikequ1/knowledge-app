@@ -228,9 +228,19 @@ function getResponses(key)
             console.log(responseStr);
             
             var childDiv = document.createElement("div");
+            childDiv.style.marginLeft = 20;
+            var userImg = document.createElement("img");
+            userImg.class = "x";
+            userImg.src="https://i.imgur.com/A7whIBi.png";
+            userImg.style.cssFloat = "left";
+            userImg.height = 70;
+            userImg.width = 70;
             childDiv.setAttribute("class", "replies");
             var text = document.createElement("p");
             text.innerHTML = responseStr;
+            text.style.textAlign = "center";
+            text.style.lineHeight = "3";
+            childDiv.appendChild(userImg);
             childDiv.appendChild(text);
             parentDiv.appendChild(childDiv);
             ctr++;
