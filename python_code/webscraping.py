@@ -14,12 +14,6 @@ topics = ["Communism", "Abortion", "Black Lives Matter", "Gun Control", "Climate
         "Socialsim vs Capitalism", "Fracking"]
 
 wikipedia_link = "https://en.wikipedia.org/wiki/"
-
-def write_json(data, filename='wiki_info.json'):
-    with open(filename,'w') as f:
-        # Import all data into json file
-        json.dump(data, f, indent=4)
-
       
 def get_topics_json():     
     with open('wiki_info.json') as json_file:
@@ -36,21 +30,21 @@ def get_topics_json():
             json_info = get_wikipedia_scraping(topic)
 
             #Continue if json_info has a return of 0
-            if json_file == 0:  
+            if json_info == 0:  
                 continue
             else:
                 all_links = get_links(topic, json_info[2])
 
                 # Input all links in list[2]
                 for link in all_links: 
-                    json_file[2] = json_file[2] + " " + link 
+                    json_info[2] = json_info[2] + " " + str(link) 
 
                 # Add collected info into json element
                 add_json = {
                     "Name": topic,
-                    "Title": json_file[0],  
-                    "Summary": json_file[1],
-                    "URL": json_file[2], 
+                    "Title": json_info[0],  
+                    "Summary": json_info[1],
+                    "URL": json_info[2], 
                 }
             
                 # Append to json
@@ -93,6 +87,11 @@ def get_wikipedia_scraping(topic):
         get_url = page.url
         info.append(get_url)
 
+        #Check other sources for links 
+        input_links(page_info, info)
+        check_series_links(page_info, info, topic)
+        print(info[2])
+
     # return Zero if an Index Error occurs
     except IndexError: 
         return 0 
@@ -108,15 +107,32 @@ def check_json(json_line):
             topics.remove(topic)
 
 
-#def input_links(all_links, list_thing):
-    #get_side_links = page_info.find_all('div', class_="sidebar-list-content mw-collapsible-content")
-#        for namelink in get_side_links:
-#            namelink = wikipedia_link + str(namelink.text.strip())
-#            print(namelink)
-#            if namelink in info[2]:
-#                #print(namelink.text.strip())
-#                continue
-#        else: 
-#            info[2] = info[2] + " " + namelink
+def input_links(page_info, info):
+    try: 
+        for get_side_links in page_info.find_all('div', class_= "sidebar-list-content mw-collapsible-content"):
+            for namelink in get_side_links.find_all("li"):
+                info[2] = info[2] + " " + wikipedia_link + namelink.a['href']
+    
+    except: 
+        print("No side links")
 
-get_wikipedia_scraping("Communism")
+
+def check_series_links(page_info, info, topic):
+    try: 
+        page = requests.get(wikipedia_link + "Category:" + topic)
+        page_info = BeautifulSoup(page.content, features="lxml")
+
+        for series_links in page_info.find_all("div", class_= "mw-category"):
+            for link in series_links.find_all("li"):
+                if str(link).find("/Category:") == -1: 
+                    info[2] = info[2] + " " + wikipedia_link + link.a['href']
+
+    except: 
+        print("No series")
+        
+def write_json(data, filename='wiki_info.json'):
+    with open(filename,'w') as f:
+        # Import all data into json file
+        json.dump(data, f, indent=4)
+
+get_topics_json()

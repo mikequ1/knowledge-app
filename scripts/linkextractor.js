@@ -1,12 +1,13 @@
 
-var searchArr = ['New_England_Patriots','Universities','Immigration','Coronavirus'];
+var searchArr = ['New_England_Patriots','Universities','Immigration','Coronavirus','Math','Computing'
+,'Literature','History','2008_Financial_Crisis'];
 var x = []
 var y = []
 var data;
 var dataArr = []
 
 
-for(var j = 0; j < 4; j++){
+for(var j = 0; j < searchArr.length; j++){
     var xhr = new XMLHttpRequest();
     var url = "https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=" +searchArr[j];
     xhr.open('GET', url, true);
@@ -48,7 +49,7 @@ function myFunc(){
 
     var stringArr = []
     var categoryArr = []
-    for(var m = 0; m < 4; m++){
+    for(var m = 0; m < searchArr.length; m++){
         for (var i in dataArr[m].query.pages) 
         {
             console.log(dataArr[m].query.pages[i].title);
