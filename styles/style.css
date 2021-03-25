@@ -5,7 +5,9 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-color: #FABC3C; /*nice pic*/
-    background-image:url("https://i.imgur.com/1uvK7nu.png");
+    /*background-image:url("https://i.imgur.com/1uvK7nu.png");*/
+
+    background-image:url("https://i.imgur.com/kpI1rNa.png");
 }
 
 button {
@@ -41,7 +43,8 @@ p {
 }
 
 .card {
-    background-color:#ffeebb;
+   /* background-color:#ffeebb;*/
+   background-color:#99ccff;
     text-align: center;
     margin-left: 1%;
     margin-bottom: 2%;
@@ -53,13 +56,14 @@ p {
 }
 
 .card:hover {
-    background-color:#ffe082;
+   /* background-color:#ffe082;*/
+   background-color: #33cccc;
     transition: 0.4s;
     box-shadow: 5px 5px 10px rgb(43, 43, 43);
 }
 
 .replies {
-    background-color:#ffeebb;
+    background-color:#99ccff;
     float: center;
     margin-left: 1%;
     margin-bottom: 2%;
@@ -72,7 +76,7 @@ p {
 }
 
 .replies:hover {
-    background-color:#ffe082;
+    background-color:#33cccc;
     transition: 0.4s;
     box-shadow: 5px 5px 10px rgb(43, 43, 43);
 }
