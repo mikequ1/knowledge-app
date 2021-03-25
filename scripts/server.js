@@ -40,8 +40,14 @@ function clearReq()
     myKey = null;
     myReq = null;
     myStorage.clear();
-    //TODO: clear all responses
+    document.getElementById("request").value = "";
+    document.getElementById("description").innerHTML = "Write a post!";
+    const myNode = document.getElementById("replies");
+    while (myNode.firstChild) {
+      myNode.removeChild(myNode.lastChild);
+    }
 }
+
 
 //Initialize "need help" interface (on page load)
 //A user's request is stored client-side on his/her computer
@@ -50,24 +56,27 @@ function initReq()
     myKey = myStorage.keyy;
     myReq = myStorage.msg;
     //TODO: Disply myReq, with HTML
-    if(myReq != null)
-        document.getElementById("description").innerHTML = myReq;
-    if (myKey != null && myReq != null)
+    if(myReq == null)
     {
-        getResponses(myKey);
+        document.getElementById("description").innerHTML = "Write a post!";
     }
     window.setInterval(function(){
-    if (myKey != null && myReq != null) //ahh np im trying to figure out a way to make the page keep refreshing like live updates of responses
-    {//Oh I'm sorry, got confused. What is the need for repeatedly calling getResponses? oh ok. We might need to clear the previous responses then yep we should probably do that
-        getResponses(myKey);
-    }},1000);
+        if (myKey != null && myReq != null) 
+        {
+            document.getElementById("request").value = myReq;
+            document.getElementById("description").innerHTML = "Comment submitted! Now wait for the replies!";
+            getResponses(myKey);
+        }
+    },1000);
 }
+
 
 //Initialize "help others" interface (on page load)
 function initHelp() 
 {
     getPosts();
 }
+
 
 //writes a new post
 function writeNewPost(taele)
@@ -89,7 +98,7 @@ function writeNewPost(taele)
 
     initReq();
 
-    taele.value = ''; // Empty the Text Box
+    //taele.value = ''; // Empty the Text Box
 }
 
 //Generates a post randomly
@@ -122,16 +131,18 @@ function getReq(key)
 }
 
 //Removes a request given its key
-function removeReq(key)
+function removeReq()
 {
-  var ref = firebase.database().ref('posts/' + key);
+  var ref = firebase.database().ref('posts/' + myStorage.keyy);
   ref.remove()
   .then(function() {
-  console.log("Remove succeeded.")
+    clearReq();
+    console.log("Remove succeeded.")
   })
   .catch(function(error) {
     console.log("Remove failed: " + error.message)
   });
+  return false;
 }
 
 
@@ -176,7 +187,9 @@ function writeResponse(key, taele)
 function getResponses(key) 
 {
     parentDiv = document.getElementById("replies");
-    while(parentDiv.childElementCount > 1){
+    
+    //remove all child elements before polling for new responses
+    while(parentDiv.childElementCount > 0){
         parentDiv.lastChild.remove();
     }
     
@@ -190,7 +203,7 @@ function getResponses(key)
             var responseKey = Object.keys(snapshot.val())[ctr]; //Retrieves the key to that^ response
             if (responseKey == "req") return;
             console.log(responseStr);
-            //TODO: display each response using HTML on the page
+            
             var childDiv = document.createElement("div");
             childDiv.setAttribute("class", "replies");
             var text = document.createElement("p");
