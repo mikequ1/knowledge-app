@@ -42,6 +42,7 @@ function clearReq()
     myStorage.clear();
     document.getElementById("request").value = "";
     document.getElementById("description").innerHTML = "Write a post!";
+    document.getElementById("request").disabled = false;
     const myNode = document.getElementById("replies");
     while (myNode.firstChild) {
       myNode.removeChild(myNode.lastChild);
@@ -59,11 +60,20 @@ function initReq()
     if(myReq == null)
     {
         document.getElementById("description").innerHTML = "Write a post!";
+        document.getElementById("request").value = "";
+    }
+    if (myKey != null && myReq != null) 
+    {
+        document.getElementById("request").value = myReq;
+        document.getElementById("request").disabled = true;
+        document.getElementById("description").innerHTML = "Comment submitted! Now wait for the replies!";
+        getResponses(myKey);
     }
     window.setInterval(function(){
         if (myKey != null && myReq != null) 
         {
             document.getElementById("request").value = myReq;
+            document.getElementById("request").disabled = true;
             document.getElementById("description").innerHTML = "Comment submitted! Now wait for the replies!";
             getResponses(myKey);
         }
