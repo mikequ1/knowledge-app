@@ -12,41 +12,15 @@ for(var j = 0; j < searchArr.length; j++){
     var url = "https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=" +searchArr[j];
     xhr.open('GET', url, true);
 
-
     xhr.onload = function() {
         dataArr.push(JSON.parse(this.response));
-        //console.log(data);
-    
-        // Log the page objects
-       // console.log(data.query.pages);
-    
-        //var stringArr = []
-    
-        //for (var i in data.query.pages) 
-        //{
-         //   console.log(data.query.pages[i].title);
-            //stringArr.push(i);
-            
-        //}
-    
-       // for(var j = 0; j < 4; j++){
-           // var index = Math.floor(Math.random() * stringArr.length);
-           // x.push(data.query.pages[stringArr[index]].title);
-        //}
     }
     xhr.send();
 
 }
 
 
-
-
 function myFunc(){
-    // Log the page objects
-    //console.log(data.query.pages);
-    
-
-
     var stringArr = []
     var categoryArr = []
     for(var m = 0; m < searchArr.length; m++){
@@ -73,6 +47,7 @@ function myFunc(){
 }
 
 
+// old javascript-based link extractor function (UNUSED)
 const container = document.querySelector("#mw-pages");
 var x = container.querySelectorAll("a");
 var myarray = []
@@ -95,6 +70,5 @@ function make_table() {
     var w = window.open("");
 w.document.write(table); 
 }
-
 
 make_table()

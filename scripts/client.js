@@ -11,3 +11,18 @@ function closeNav() {
 function removeCard(elem) {
     //TODO:
 }
+
+function populateArticles(){
+    keys.length = 0;
+    myFunc();
+    for(var i = 0; i < 4; i++){
+      var userReq = document.getElementById("header" + (i + 1));
+      console.log(x);
+      var req = x;
+    var newTitle = "Article title: " + req[i];
+    userReq.innerHTML = newTitle;
+
+    var linkReq = document.getElementById("link"+(i+1));
+    linkReq.href = y[i];
+    }
+}

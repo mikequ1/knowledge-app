@@ -50,37 +50,6 @@
             initHelp();
             console.log("loaded page");
         }
-
-        function replace(i){
-            var userReq = document.getElementById("req" + (i + 1));
-            var req = getAPost();
-        //alert(req[0]);
-        //alert(req[1]);
-        //console.log(req.keey);
-            userReq.innerHTML = req.value;
-            keys[i] = req.keey;
-        }
-
-        function dothis(){
-            keys.length = 0;
-            myFunc();
-            for(var i = 0; i < 4; i++){
-              var userReq = document.getElementById("header" + (i + 1));
-              console.log(x);
-              var req = x;
-           //var req = getAPost();
-            //alert(req[0]);
-            //alert(req[1]);
-            //maybe returning an array is a bad idea?
-            //console.log(req.keey);
-            var newTitle = "Article title: " + req[i];
-            userReq.innerHTML = newTitle;
-
-            var linkReq = document.getElementById("link"+(i+1));
-            linkReq.href = y[i];
-            //keys.push(req.keey);
-            }
-        }
     </script>
 </head>
 
@@ -151,7 +120,7 @@
     </section>
 
     <div id="align-cent">
-        <button type="button" onclick="dothis()">
+        <button type="button" onclick="populateArticles()">
             Refresh
         </button>
     </div>
