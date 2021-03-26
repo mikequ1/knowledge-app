@@ -99,6 +99,7 @@ def get_wikipedia_scraping(topic):
         #Check other sources for links 
         input_links(page_info)
         check_series_links(page_info, topic)
+        return 1
 
     # return Zero if an Index Error occurs
     except IndexError: 
@@ -196,23 +197,26 @@ def get_topics_json_two():
         for topic in topics: 
             check = get_wikipedia_scraping(topic)
 
-            for url in global_links:
-                title = get_wikipedia_title(url)
+            if check == 0:
+                continue
+            else: 
+                for url in global_links:
+                    title = get_wikipedia_title(url)
 
-                add_json = { 
-                    "Topic" : topic, 
-                    "Site": [{
-                        "Title": title, 
-                        "Summary": get_summary(url),  
-                        "Url": url,
-                        "Pictures" : get_picture_link(title)
-                    }]
-                }
+                    add_json = { 
+                        "Topic" : topic, 
+                        "Site": [{
+                            "Title": title, 
+                            "Summary": get_summary(url),  
+                            "Url": url,
+                            "Pictures" : get_picture_link(title)
+                        }]
+                    }
                 
-                temp.append(add_json)
-            write_json(data)
+                    temp.append(add_json)
 
-            global_links.clear()
+                    write_json(data)
+                global_links.clear()
 
             
         
