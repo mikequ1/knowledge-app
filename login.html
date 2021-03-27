@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--DEPENDENCIES:-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+
+    <link rel="stylesheet" href="../knowledge-app/styles/style.css">
+    <script src="../knowledge-app/scripts/client.js"></script>
+    <script src="../knowledge-app/scripts/server.js"></script>
+    <script src="../knowledge-app/scripts/linkextractor.js"></script>
+
+</head>
+<body>
+    <div id="loginScreen">
+        <h1>Login page test</h1>
+        <input type="email" id="email" placeholder="Enter your email">
+        <input type="text" id="password" placeholder="Enter your password">
+        <br>
+        <button id="loginBtn">Log in</button>
+    </div>
+
+    <div id="dashboard">
+        <div id="userDetails"></div>
+        <button id="logoutBtn">Log out</button>
+    </div>
+
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', LoginUser);
+        document.getElementById('logoutBtn').addEventListener('click', LogoutUser);
+
+        document.getElementById('loginScreen').style.display = "block";
+        document.getElementById('dashboard').style.display = "none";
+        
+        function LoginUser() {
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    var user = userCredential.user;
+                    // ...
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                });
+        }
+
+        function LogoutUser() {
+            firebase.auth().signOut().then(() => {
+                    // Sign-out successful.
+                }).catch((error) => {
+                    // An error happened.
+                });
+        }
+
+        function showUserDetails(user){
+            document.getElementById('userDetails').innerHtml = '<p>Logged in success with ${user.email}</p>'
+        }
+
+        firebase.auth().onAuthStateChanged(user => {
+            if(user) {
+                console.log(user);
+                document.getElementById('loginScreen').style.display = "none";
+                document.getElementById('dashboard').style.display = "block";
+                showUserDetails(user);
+            } else {
+                document.getElementById('loginScreen').style.display = "block";
+                document.getElementById('dashboard').style.display = "none";
+            }
+        })
+    
+    </script>
+</body>
+</html>
