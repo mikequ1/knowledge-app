@@ -60,6 +60,7 @@
         document.getElementById('loginScreen').style.display = "block";
         document.getElementById('dashboard').style.display = "none";
         
+
         function LoginUser() {
             let email = document.getElementById('email').value;
             let password = document.getElementById('password').value;
@@ -68,11 +69,12 @@
                 .then((userCredential) => {
                     // Signed in
                     var user = userCredential.user;
-                    // ...
+                    console.log("being logged in");
                 })
                 .catch((error) => {
                     var errorCode = error.code;
                     var errorMessage = error.message;
+                    console.log("error logging in");
                 });
         }
 
@@ -87,6 +89,7 @@
         function showUserDetails(user){
             document.getElementById('userDetails').innerHtml = '<p>Logged in success with ${user.email}</p>'
         }
+
 
         firebase.auth().onAuthStateChanged(user => {
             if(user) {
