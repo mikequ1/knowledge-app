@@ -11,7 +11,7 @@ body {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #9933ff;
     border:none;
     color: white;
     text-align: center;
@@ -28,7 +28,7 @@ button {
 }
 
 button:hover{
-    background-color: #009905;
+    background-color: #6600cc;
     transition: 0.4s;
 }
 

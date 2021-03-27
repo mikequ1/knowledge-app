@@ -45,11 +45,11 @@
         <input type="email" id="email" placeholder="Enter your email">
         <input type="text" id="password" placeholder="Enter your password">
         <br>
-        <button id="signUp">Sign Up</button>
+        <button id="signUp" onclick = "signUpUser()" >Sign Up</button>
     </div>
 
     <script>
-        document.getElementById('signUp').addEventListener('click', signUpUser);
+       // document.getElementById('signUp').addEventListener('click', signUpUser);
         
         function signUpUser() {
             let email = document.getElementById('email').value;
