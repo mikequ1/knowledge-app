@@ -15,7 +15,7 @@ link_filter_two = ["climate.nasa.gov", "www.history.com", "www.brookings.edu", "
             "www.nature.org", "news.gallup.com", "www.pewresearch.com", "www.foundationsoflife.org", "prochoice.org",
             "www.plannedparenhood.org", "www.investopedia.com"]
 
-topics = ["Communism", "Discrimination", "Capitalism", "Bioethics", 
+topics = ["r5u6it7kligrd", "Communism", "Discrimination", "Capitalism", "Bioethics", 
         "War", "Education", "Genetical Modified Organsim", "Climate Change", 
         "Human overpopulation", "Artificial Intelligence", "Pharmaceutical industry", "Cybersecurity", "Mental Health", "History"]
 
@@ -66,6 +66,27 @@ def get_wikipedia_scraping(topic):
         page.close()
         return 1
 
+    except requests.exceptions.ConnectionError:
+        sleep(120)
+        # Grab the title of the Wikipedia Page 
+        title = page_info.find_all("h1", class_="firstHeading") 
+        info.append(title[0].text.strip())
+
+        # Grab a summary from the Wikipedia Page
+        summary = page_info.find_all('div', class_="shortdescription nomobile noexcerpt noprint searchaux")
+        info.append(summary[0].text.strip())
+
+        # Grab the URL from the Wikipedia Page
+        get_url = page.url
+        global_links.append(get_url)
+
+        #Check other sources for links 
+        input_links(page_info)
+        check_series_links(topic)
+
+        page.close()
+        return 1
+
     # return Zero if an Index Error occurs
     except IndexError: 
         page.close()
@@ -94,7 +115,11 @@ def input_links(page_info):
         for get_side_links in page_info.find_all('div', class_= "sidebar-list-content mw-collapsible-content"):
             for namelink in get_side_links.find_all("li"):
                 global_links.append("https://en.wikipedia.org" + namelink.a['href'])
-    
+    except requests.exceptions.ConnectionError:
+        sleep(120)
+        for get_side_links in page_info.find_all('div', class_= "sidebar-list-content mw-collapsible-content"):
+            for namelink in get_side_links.find_all("li"):
+                global_links.append("https://en.wikipedia.org" + namelink.a['href'])
     except: 
         print("No side links")
 
@@ -109,6 +134,14 @@ def check_series_links(topic):
                     global_links.append("https://en.wikipedia.org" + link.a['href'])
         
         page.close()
+    except requests.exceptions.ConnectionError:
+        sleep(120)
+        page = requests.get(wikipedia_link + "/" + "Category:" + topic)
+        page_info = BeautifulSoup(page.content, features="lxml")
+        for series_links in page_info.find_all("div", class_= "mw-category"):
+            for link in series_links.find_all("li"):
+                if str(link).find("/Category:") == -1:
+                    global_links.append("https://en.wikipedia.org" + link.a['href'])
 
     except: 
         print("No series")
@@ -136,12 +169,15 @@ def get_directory(topic):
                 return x
 
 def get_summary(url): 
-
     try: 
         if url.find("https://en.wikipedia.org/wiki/") != -1:
             y = url.replace('https://en.wikipedia.org/wiki/', '')
             return wikipedia.summary(y)
-
+    except requests.exceptions.ConnectionError:
+        sleep(120)
+        if url.find("https://en.wikipedia.org/wiki/") != -1:
+            y = url.replace('https://en.wikipedia.org/wiki/', '')
+            return wikipedia.summary(y)
     except: 
         return "No Summary Available"
 
