@@ -41,13 +41,30 @@ p {
 }
 
 .card {
-  /* background-color:#ffeebb;*/
+  /* background-color:#99ccff; */
+  text-align: center;
+  margin-left: 1%;
+  margin-bottom: 2%;
+  margin-top: 40px;
+  padding-bottom: 20px;
+  border-radius: 25px;
+  border-color: #fae900;
+  border-width: 15px;
+  transition: 0.4s;
+  box-shadow: 2.5px 2.5px 10px rgb(71, 71, 71);
+  min-width: 300px;
+  background-image: url("https://i.imgur.com/kpI1rNa.png");
+}
+
+.knowledgeCard {
   background-color: #99ccff;
   text-align: center;
   margin-left: 1%;
   margin-bottom: 2%;
   padding-bottom: 20px;
   border-radius: 25px;
+  border-color: #fae900;
+  border-width: 10px;
   transition: 0.4s;
   box-shadow: 2.5px 2.5px 10px rgb(71, 71, 71);
   min-width: 300px;
@@ -55,9 +72,31 @@ p {
 
 .card:hover {
   /* background-color:#ffe082;*/
-  background-color: #33cccc;
+  border-color: #fac000;
   transition: 0.4s;
   box-shadow: 5px 5px 10px rgb(43, 43, 43);
+}
+
+.knowledgeCard:hover {
+  background-color: #99bdff;
+  transition: 0.4s;
+  box-shadow: 5px 5px 10px rgb(43, 43, 43);
+}
+
+.replytext {
+  text-align: center;
+  font-weight: normal;
+  font-family: sans-serif;
+  font-size: 20px;
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+
+.replytxtarea {
+  width: 90%;
+  background-color: #f8f8f8;
+  border-color: #474747;
+  border-width: 3px;
 }
 
 .replies {
