@@ -7,53 +7,25 @@ import os
 from time import sleep
 from simple_image_download import simple_image_download as simp 
 
-
-link_filter = ["en.wikipedia.org"]
-
-link_filter_two = ["climate.nasa.gov", "www.history.com", "www.brookings.edu", "www.britannica.com", 
-            "deathpenaltyinfo.org", "harvardpolitics.com", "www.nrdc.org", "www.livescience.com", "www.epa.gov", "www.nrdc.org",
-            "www.nature.org", "news.gallup.com", "www.pewresearch.com", "www.foundationsoflife.org", "prochoice.org",
-            "www.plannedparenhood.org", "www.investopedia.com"]
-
-topics = ["Communism", "Discrimination", "Capitalism", "Bioethics", 
-        "War", "Education", "Genetical Modified Organsim", "Climate Change", 
-        "Human overpopulation", "Artificial Intelligence", "Pharmaceutical industry", "Cybersecurity", "Mental Health", "History"]
+topics = ["EWFfsdf", "Communism", "Discrimination", "Capitalism", "Bioethics", 
+        "War", "Education", "Genetic engineering", "Climate Change", 
+        "Human overpopulation", "Artificial intelligence", "Pharmaceutical industry", "Computer security", "Mental health"]
 
 global_links = []
 
 wikipedia_link = "https://en.wikipedia.org/wiki"  
 
-def get_links(topic, url_used):
-    links = []
-    
-    # Grab 20 Search results 
-    for google_link in search(topic, tld="co.in", num=20, stop=20, pause=1):
-        # Check the link off link filter and append to list
-        for selected_link in link_filter: 
-            if google_link.find(selected_link) != -1:
-                if url_used in selected_link: 
-                    continue
-                else:  
-                    links.append(google_link)
-
-    return links
-    
-
 def get_wikipedia_scraping(topic): 
-    info = []
-    
+    error_string = "Wikipedia does not have an article with this exact name."
     # Request for Wikipedia link on the topic
     page = requests.get(wikipedia_link + "/" + topic)
     page_info = BeautifulSoup(page.content, features="lxml")
 
     try: 
-        # Grab the title of the Wikipedia Page 
-        title = page_info.find_all("h1", class_="firstHeading") 
-        info.append(title[0].text.strip())
-
-        # Grab a summary from the Wikipedia Page
-        summary = page_info.find_all('div', class_="shortdescription nomobile noexcerpt noprint searchaux")
-        info.append(summary[0].text.strip())
+        # Check if Wikipedia topic exists
+        for error in page_info.findAll('b'):
+            if error_string in error.text.strip():
+                return 0
 
         # Grab the URL from the Wikipedia Page
         get_url = page.url
@@ -67,39 +39,52 @@ def get_wikipedia_scraping(topic):
         return 1
 
     # return Zero if an Index Error occurs
-    except IndexError: 
-        page.close()
-        return 0 
-    
+    except requests.exceptions.ConnectionError: 
+        sleep(300)
+        global_links.clear()
+        get_wikipedia_scraping(topic)
 
 
 def get_wikipedia_title(topic): 
-    page = requests.get(topic)
-    page_info = BeautifulSoup(page.content, features="lxml")
-
-    title = page_info.find_all("h1", class_="firstHeading")
-    page.close()
-    return title[0].text.strip()
+    try: 
+        page = requests.get(topic)
+        page_info = BeautifulSoup(page.content, features="lxml")
+        
+        # grabs the title of the wikipedia article
+        title = page_info.find_all("h1", class_="firstHeading")
+        page.close()
+        return title[0].text.strip()
+    
+    except requests.exceptions.ConnectionError: 
+        sleep(300)
+        get_wikipedia_title(topic)
 
 
 def check_json(json_line):
-    # Delete from topics list if there is a duplicate
-    for topic in topics:
-        if json_line in topic:
-            topics.remove(topic)
-
+    # checks if there is a duplicate or not
+    for title in json_line:
+        for topic in topics:
+            if topic.lower() == title["Topic"].lower():
+                print(topic)
+                topics.remove(topic)
+                
 
 def input_links(page_info):
+    # checks if there are links to the right side of the main article 
     try: 
         for get_side_links in page_info.find_all('div', class_= "sidebar-list-content mw-collapsible-content"):
             for namelink in get_side_links.find_all("li"):
                 global_links.append("https://en.wikipedia.org" + namelink.a['href'])
+
+    except requests.exceptions.ConnectionError:
+        raise
     
     except: 
         print("No side links")
 
 
 def check_series_links(topic):
+    # checks if there is a series 
     try: 
         page = requests.get(wikipedia_link + "/" + "Category:" + topic)
         page_info = BeautifulSoup(page.content, features="lxml")
@@ -109,6 +94,9 @@ def check_series_links(topic):
                     global_links.append("https://en.wikipedia.org" + link.a['href'])
         
         page.close()
+
+    except requests.exceptions.ConnectionError: 
+        raise
 
     except: 
         print("No series")
@@ -124,24 +112,17 @@ def get_picture_link(topic):
     
     r.close()
 
-def get_directory(topic): 
-    dir_path = os.listdir("simple_images")
-
-    for i in dir_path:
-        i = i.replace(' ', '_')
-        topic = topic.replace(' ', '_')
-        if i == topic:
-            y = os.listdir("simple_images/" + i)
-            for x in y: 
-                return x
-
 def get_summary(url): 
-
     try: 
+        # replaces the wikipedia url to get the article title page
         if url.find("https://en.wikipedia.org/wiki/") != -1:
             y = url.replace('https://en.wikipedia.org/wiki/', '')
             return wikipedia.summary(y)
 
+    except requests.exceptions.ConnectionError:
+        sleep(300)
+        get_summary(url)
+        
     except: 
         return "No Summary Available"
 
@@ -155,18 +136,24 @@ def write_json(data, filename='wiki_info.json'):
 if __name__ == '__main__':  
     with open('wiki_info.json') as json_file:
 
+        # Ask the user if they want to add topics
+        ans = input("Do you want to add more topics (Enter 1 for yes or 2 for no?): ")
+        while ans == "1": 
+            add_topic = input("Add one topic: ")
+            topics.append(add_topic.lower())
+
+            ans = input("Do you wish to add another topic? (Enter 1 for yes or 2 for no?): ")
+            
+        # Load the json file to be readable by python
         data = json.load(json_file)
         temp = data["Topics"]
 
+        # check whether the topic has been used
+        check_json(temp)
+        
         for topic in topics:
-            # Sleep when wikipedia closes connection
-            try: 
-                check = get_wikipedia_scraping(topic)
-            except requests.exceptions.ConnectionError: 
-                sleep(300)
-                global_links.clear()
-                check = get_wikipedia_scraping(topic)
-                continue
+            # Grab Wikipedia information
+            check = get_wikipedia_scraping(topic)
             
             # Checks whether there is any information on topic 
             if check == 0:
@@ -174,22 +161,24 @@ if __name__ == '__main__':
             else: 
                 # Goes through URLS in the global_url and attaches to json
                 for url in global_links:
-                        sleep(3)
-                        title = get_wikipedia_title(url)
+                    # Grab title of the current article 
+                    title = get_wikipedia_title(url)
 
-                        add_json = { 
-                            "Topic" : topic, 
-                            "Site": [{
-                                "Title": title, 
-                                "Summary": get_summary(url),  
-                                "Url": url,
-                                "Pictures" : get_picture_link(title)
-                            }]
-                        }
-                
-                        temp.append(add_json)
+                    add_json = { 
+                        "Topic" : topic, 
+                        "Site": [{
+                            "Title": title, 
+                            "Summary": get_summary(url),  
+                            "Url": url,
+                            "Pictures" : get_picture_link(title)
+                        }]
+                    }
 
-                        write_json(data)
+                    # append to the current copied json
+                    temp.append(add_json)
+
+                    # Write to json 
+                    write_json(data)
                 # Clear list for next topic links
                 global_links.clear()
 
