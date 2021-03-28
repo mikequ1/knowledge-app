@@ -1,8 +1,9 @@
+<!-- This is the webpage to read articles-->
 <!DOCTYPE html>
 
 <html lang="en">
 <head>
-    <title>Knowledge App</title>
+    <title>About Page</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,45 +36,16 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
 
     <link rel="stylesheet" href="./styles/style.css">
-    <script src="./scripts/client.js"></script>
-    <script src="./scripts/server.js"></script>
 
     <script>
-        function loadindex(){
-            initReq();
+        var keys = [];
+
+        function loadpage(){
+            var cardParent = document.getElementById("requests");
+            console.log("loaded page");
         }
     </script>
-
 </head>
-
-<body onload="loadindex()">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()" id="opennav" class="menu">&#9776; Menu</span> <!-- this i think contains the code to reopen it-->
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="login.html">Dashboard</a>
-        <a href="index.html">Read articles</a>
-        <a href="addPost.html">Respond to an article </a>
-        <a href="respondToPost.html">Respond to other posts</a>
-    </div>
-
-    <section class="container-fluid row" id="sendreq" style="margin-top: 20px;">
-        <div class="col knowledgeCard">
-            <h1 id="description">
-                Write a post to your favorite article here!
-            </h1>
-            <form>
-                <div>
-                    <textarea name="request" id="request"></textarea>
-                </div>
-                <div>
-                    <button type="button" class="submit" onclick="writeNewPost(request);return false"> submit </button>
-                    <button type="button" class="submit" onclick="removeReq()"> remove </button>
-                </div>
-            </form>
-        </div>
-    </section>
-    <section class="container-fluid row" id="replies">
-        
-    </section>
+<body>
+    <h1 style="text-align: center;">About Us</h1>
 </body>
-</html>
