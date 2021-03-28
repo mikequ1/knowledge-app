@@ -60,7 +60,6 @@
             <button id="loginBtn" class="submit">Log in</button>
             <br>
             <text>New to (placeholder name)? </text>
-            <br>
             <a href="signup.html" style="color: purple">Create an account</a>
         </div>
     
@@ -88,7 +87,7 @@
                 .then((userCredential) => {
                     // Signed in
                     var user = userCredential.user;
-                    console.log("being logged in");
+                    document.getElementById("userDetails").innerHTML = "Logged in success with " + email + ". Press the menu icon to join the discussion.";
                 })
                 .catch((error) => {
                     var errorCode = error.code;

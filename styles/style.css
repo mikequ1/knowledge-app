@@ -211,8 +211,9 @@ textarea {
   justify-content: right;
   align-items: right;
   background-color: lightblue;
-  width: 20%;
-  height: 50%;
+  border-radius: 20px;
+  width: 400px;
+  height: 450px;
 
   
   position: absolute;
