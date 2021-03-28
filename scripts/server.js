@@ -142,8 +142,7 @@ function getAPost()
 }
 
 //Gets a request string given its key (only applies to "i need help" posts)
-function getReq(key)
-{
+function getReq(key){
   var ref = firebase.database().ref("posts");
   ref.on("value", function(snapshot) {
   var childData = snapshot.val();         
@@ -152,8 +151,7 @@ function getReq(key)
 }
 
 //Removes a request given its key
-function removeReq()
-{
+function removeReq(){
   var ref = firebase.database().ref('posts/' + myStorage.keyy);
   ref.remove()
   .then(function() {
@@ -168,13 +166,11 @@ function removeReq()
 
 
 //gets all posts
-function getPosts() 
-{
+function getPosts() {
     getPostsDone = false;
     var numberOfRequests = 0; 
     var leadRef = firebase.database().ref('posts');
-    leadRef.on("value", function(snapshot) 
-    {
+    leadRef.on("value", function(snapshot) {
         if(!getPostsDone){
         reqKeyArr = [];
         reqStrArr = [];
@@ -206,9 +202,37 @@ function writeResponse(key, taele)
     newres.set(str);
 }
 
-//allows a user to receive the responses to their originally-written post
-function getResponses(key) 
+function getUserIcon()
 {
+    var animals = ['Alligator', 'Anteater', 'Armadillo', 'Auroch', 'Axolotl',
+    'Badger', 'Bat', 'Beaver', 'Buffalo', 'Camel', 'Capybara',
+    'Chameleon', 'Cheetah', 'Chinchilla', 'Chipmunk', 'Chupacabra',
+    'Cormorant', 'Coyote', 'Crow', 'Dingo', 'Dinosaur', 'Dolphin',
+    'Duck', 'Elephant', 'Ferret', 'Fox', 'Frog', 'Giraffe', 'Gopher',
+    'Grizzly', 'Hedgehog', 'Hippo', 'Hyena', 'Ibex', 'Ifrit', 'Iguana',
+    'Jackal', 'Kangaroo', 'Koala', 'Kraken', 'Lemur', 'Leopard',
+    'Liger', 'Llama', 'Manatee', 'Mink', 'Monkey', 'Moose', 'Narwhal',
+    'Nyan Cat', 'Orangutan', 'Otter', 'Panda', 'Penguin', 'Platypus',
+    'Pumpkin', 'Python', 'Quagga', 'Rabbit', 'Raccoon', 'Rhino',
+    'Sheep', 'Shrew', 'Skunk', 'Squirrel', 'Tiger', 'Turtle', 'Walrus',
+    'Wolf', 'Wolverine', 'Wombat']
+
+    var index = Math.floor(Math.random() * animals.length);
+    return "https://github.com/wayou/anonymous-animals/blob/master/icons/" + animals[index] + ".png?raw=true";
+}
+
+var iconString = [];
+function generateIconString()
+{
+    for (var i = 0; i < 100; i++){
+        iconString.push(getUserIcon());
+    }
+}
+
+
+//allows a user to receive the responses to their originally-written post
+generateIconString();
+function getResponses(key) {
     parentDiv = document.getElementById("replies");
     
     //remove all child elements before polling for new responses
@@ -217,29 +241,32 @@ function getResponses(key)
     }
     
     var leadRef = firebase.database().ref('posts/' + key);
-    leadRef.on("value", function(snapshot) 
-    {
+    leadRef.on("value", function(snapshot) {
         var ctr = 0;
-        snapshot.forEach(function(childSnapshot) 
-        {
+        snapshot.forEach(function(childSnapshot) {
             var responseStr = childSnapshot.val();        //Retrieves responses
             var responseKey = Object.keys(snapshot.val())[ctr]; //Retrieves the key to that^ response
             if (responseKey == "req") return;
-            console.log(responseStr);
             
             var childDiv = document.createElement("div");
-            childDiv.style.marginLeft = 20;
+            childDiv.style.marginLeft = "10%";
+            childDiv.style.marginRight = "10%";
+
             var userImg = document.createElement("img");
             userImg.class = "x";
-            userImg.src="https://i.imgur.com/A7whIBi.png";
+            userImg.src = iconString[ctr];
             userImg.style.cssFloat = "left";
+            userImg.style.marginLeft = "10px";
             userImg.height = 70;
             userImg.width = 70;
             childDiv.setAttribute("class", "replies");
+
             var text = document.createElement("p");
-            text.innerHTML = responseStr;
-            text.style.textAlign = "center";
+            text.innerHTML = ">>&nbsp;&nbsp;&nbsp;&nbsp;" + responseStr;
+            text.style.textAlign = "left";
             text.style.lineHeight = "3";
+            text.style.marginLeft = "10%";
+            text.style.marginRight = "5%";
             childDiv.appendChild(userImg);
             childDiv.appendChild(text);
             parentDiv.appendChild(childDiv);
