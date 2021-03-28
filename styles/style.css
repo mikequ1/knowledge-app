@@ -133,7 +133,7 @@ textarea {
 }
 
 .submit {
-  background-color: #ffc1b6;
+  background-color: #8027d8;
   border: none;
   color: white;
   text-align: center;
@@ -143,7 +143,7 @@ textarea {
 }
 
 .submit:hover {
-  background-color: #fd8671;
+  background-color: #6600cc;
   transition: 0.4s;
 }
 
@@ -208,12 +208,13 @@ textarea {
 
 .loginShell {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: right;
+  align-items: right;
   background-color: lightblue;
-  width: 50%;
+  width: 20%;
   height: 50%;
 
+  
   position: absolute;
   top: 0;
   bottom: 0;
@@ -221,6 +222,7 @@ textarea {
   right: 0;
 
   margin: auto;
+  padding: 30px;
 }
 
 .dashboard {
@@ -237,16 +239,45 @@ textarea {
   right: 0;
 }
 
-#loginScreen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 50%;
+#loginScreen { 
+  padding-left: 10px;
+}
 
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+#loginBtn { 
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#gmail {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  font-size: 15px;
+  color:white;
+}
+
+#Password {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: white;
+}
+
+#authlogo {
+  margin: 10px;
+  float: right;
+  width: 100px;
+  height: 100px;
+}
+
+h1.entry {
+  font-size: 30px;
+  color: #6600cc;
+}
+
+.authinput{
+  margin-bottom: 10px;
+  height: 35px;
+  width: 250px;
 }

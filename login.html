@@ -50,20 +50,25 @@
 
     <div class="loginShell">
         <div id="loginScreen">
-            <h1>Log in to (placeholder name)</h1>
-            <input type="email" id="email" placeholder="Enter your email">
-            <input type="password" id="password" placeholder="Enter your password">
+            <img src="pen.png" id="authlogo">
+            <h1 class="entry">Log in to (placeholder name)</h1>
+            <h3 id="gmail">Gmail</h3>
+            <input type="email" class="authinput" id="email" placeholder="Enter your email">
+            <h3 id="Password">Password</h3>
+            <input type="password" class="authinput" id="password" placeholder="Enter your password">
             <br>
-            <button id="loginBtn">Log in</button>
+            <button id="loginBtn" class="submit">Log in</button>
             <br>
-            <text>New to (placeholder name)? <a href="signup.html" style="color: white">Create an account</a></text>
+            <text>New to (placeholder name)? </text>
+            <br>
+            <a href="signup.html" style="color: purple">Create an account</a>
         </div>
     
         <div id="dashboard">
             <div id="userDetails" style="display: none">
                 <text>Welcome! Press the menu icon to join the discussion.</text>
             </div>
-            <button id="logoutBtn">Log out</button>
+            <button id="logoutBtn" class="submit">Log out</button>
         </div>
 
     </div>
@@ -89,6 +94,9 @@
                     var errorCode = error.code;
                     var errorMessage = error.message;
                     console.log(errorCode + " " + errorMessage);
+                    alert("Invalid username or password");
+                    document.getElementById("password").value = "";
+                    document.getElementById("email").value = "";
                 });
         }
 
