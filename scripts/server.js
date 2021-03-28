@@ -94,6 +94,12 @@ function writeNewPost(taele)
     if (myStorage.keyy != null && myStorage.msg != null)
         return;
     var str = taele.value;
+    if (str.length == 0){
+        alert("don't submit an empty string!");
+        taele = "";
+        return;
+    }
+
     var postData = {req: str,};
 
     var newPostKey = firebase.database().ref().child('posts').push().key; //makes a new (anonymous) key that stores the post
@@ -197,6 +203,11 @@ function writeResponse(key, taele)
     if (key == null)
         return;
     str = taele.value;
+    if (str.length == 0){
+        alert("don't submit an empty string!");
+        taele = "";
+        return;
+    }
     var newres = firebase.database().ref('posts/' + key).push();
     console.log("Response written");
     newres.set(str);
