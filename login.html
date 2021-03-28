@@ -40,19 +40,33 @@
 
 </head>
 <body>
-    <div id="loginScreen">
-        <h1>Login page test</h1>
-        <input type="email" id="email" placeholder="Enter your email">
-        <input type="text" id="password" placeholder="Enter your password">
-        <br>
-        <button id="loginBtn">Log in</button>
+    <span style="font-size:30px;cursor:pointer;display:none" onclick="openNav()" id="opennav" class="menu">&#9776; Menu</span> <!-- this i think contains the code to reopen it-->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="addPost.html">Respond to an article </a>
+        <a href="index.html">Read articles</a>
+        <a href="respondToPost.html">Respond to other posts</a>
     </div>
 
-    <div id="dashboard">
-        <div id="userDetails"></div>
-        <button id="logoutBtn">Log out</button>
-    </div>
+    <div class="loginShell">
+        <div id="loginScreen">
+            <h1>Log in to (placeholder name)</h1>
+            <input type="email" id="email" placeholder="Enter your email">
+            <input type="password" id="password" placeholder="Enter your password">
+            <br>
+            <button id="loginBtn">Log in</button>
+            <br>
+            <text>New to (placeholder name)? <a href="signup.html" style="color: white">Create an account</a></text>
+        </div>
+    
+        <div id="dashboard">
+            <div id="userDetails" style="display: none">
+                <text>Welcome! Press the menu icon to join the discussion.</text>
+            </div>
+            <button id="logoutBtn">Log out</button>
+        </div>
 
+    </div>
     <script>
         document.getElementById('loginBtn').addEventListener('click', LoginUser);
         document.getElementById('logoutBtn').addEventListener('click', LogoutUser);
@@ -96,13 +110,16 @@
                 console.log(user);
                 document.getElementById('loginScreen').style.display = "none";
                 document.getElementById('dashboard').style.display = "block";
+                document.getElementById('opennav').style.display = "block";
+                document.getElementById('userDetails').style.display = "block";
                 showUserDetails(user);
             } else {
                 document.getElementById('loginScreen').style.display = "block";
                 document.getElementById('dashboard').style.display = "none";
+                document.getElementById('opennav').style.display = "none";
+                document.getElementById('userDetails').style.display = "none";
             }
         })
-    
     </script>
 </body>
 </html>

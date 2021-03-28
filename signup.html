@@ -40,12 +40,14 @@
 
 </head>
 <body>
-    <div>
-        <h1>Account creation page test</h1>
-        <input type="email" id="email" placeholder="Enter your email">
-        <input type="text" id="password" placeholder="Enter your password">
-        <br>
-        <button id="signUp" onclick = "signUpUser()" >Sign Up</button>
+    <div class="loginShell">
+        <div>
+            <h1>Sign up to join the conversation!</h1>
+            <input type="email" id="email" placeholder="Enter your email">
+            <input type="password" id="password" placeholder="Enter your password">
+            <br>
+            <button id="signUp" onclick = "signUpUser()">Sign Up</button>
+        </div>
     </div>
 
     <script>
@@ -59,6 +61,7 @@
                 .then((userCredential) => {
                     // Signed in 
                     var user = userCredential.user;
+                    window.location.href = "login.html"
                     // ...
                 })
                 .catch((error) => {
@@ -79,21 +82,4 @@
     </script>
 </body>
 </html>
-<!--
-    <form>
-        <label for="emailSetup">Input email</label>
-        <input type="email" id="emailSetup" placeholder="Enter your email">
-        <label for="passwordSetup">Input password</label>
-        <input type="text" id="passwordSetup" placeholder="Enter your password">
-        <label for="passwordConfirmation">Confirm password</label>
-        <input type="text" id="passwordConfirmation">
-        <button type="button" id="button" onclick="get()">Submit</button>
-    </form>
 
-<button id="button" onclick="get()">test get function</button>
-
-<input type="email" id="emailTest">
-<input type="text" id="passwordTest">
-
-<input type="submit" value="Submit" id="button">
--->
