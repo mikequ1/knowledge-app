@@ -102,6 +102,7 @@ def check_series_links(topic):
         print("No series")
 
 def get_picture_link(topic): 
+    # grabs pictures 
     r = requests.get("https://www.google.com/search?q=" + topic + "&safe=strict&rlz=1C1CHBF_enUS925US925&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjSgNaHzszvAhUHKK0KHTltDj8Q_AUoAnoECAEQBA&biw=1268&bih=589")
     soup = BeautifulSoup(r.content, features="lxml")
 
@@ -114,7 +115,7 @@ def get_picture_link(topic):
 
 def get_summary(url): 
     try: 
-        # replaces the wikipedia url to get the article title page
+        # replaces the wikipedia url to get the article summary
         if url.find("https://en.wikipedia.org/wiki/") != -1:
             y = url.replace('https://en.wikipedia.org/wiki/', '')
             return wikipedia.summary(y)

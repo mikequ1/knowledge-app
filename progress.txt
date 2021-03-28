@@ -1,22 +1,31 @@
-3/25
+for progress checking: 3/26
 
 Priority key:
-*** for high priority
-** for medium priority
-* for low priority
+1 for high priority
+2 for medium priority
+3 for low priority
 
 DONE:
--***front end for messaging
--***firebase back end for messaging
--***site setup and navigation
+1- front end for messaging
+1- firebase back end for messaging
+1- site setup and navigation
+1- formatting (css, colors, background etc.)
+1- webscraping back end (almost done)
+1- webscraping front end (almost done)
+
 
 IN PROGRESS:
--***webscraping back end (almost done)
--***webscraping front end (almost done)
--**firebase backend for login
--***formatting (css, colors, background etc.)
+2- chat filtering (maybe if we have time)
+2- firebase backend for login
 
 TODO:
-- **front end for login
-- **chat filtering (maybe if we have time)
-- *login personal dashboard and scoreboard etc
+2- front end for login
+3- login personal dashboard and scoreboard etc
+
+
+
+THINGS TO FIX: (really minor things)
+- message avatar icon to make it look nicer 
+- message fonts
+- make respondToPost reload getAllPosts() to prevent undefined behavior
+- button color change
