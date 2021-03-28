@@ -1,3 +1,4 @@
+# Program grabs wikipedia series and inputs all links into a json file. 
 import requests 
 import json 
 from bs4 import BeautifulSoup
@@ -84,7 +85,7 @@ def input_links(page_info):
 
 
 def check_series_links(topic):
-    # checks if there is a series 
+    # checks if there is a series for the article 
     try: 
         page = requests.get(wikipedia_link + "/" + "Category:" + topic)
         page_info = BeautifulSoup(page.content, features="lxml")
@@ -105,7 +106,7 @@ def get_picture_link(topic):
     # grabs pictures 
     r = requests.get("https://www.google.com/search?q=" + topic + "&safe=strict&rlz=1C1CHBF_enUS925US925&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjSgNaHzszvAhUHKK0KHTltDj8Q_AUoAnoECAEQBA&biw=1268&bih=589")
     soup = BeautifulSoup(r.content, features="lxml")
-
+    # look for picture links on google and return them
     for link in soup.select("img[src^=http]"):
         if "http" in link.get('src'):
             lnk = link.get('src')
