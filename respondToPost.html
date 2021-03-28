@@ -63,6 +63,7 @@
                         userReq.innerHTML = req.value;
                         keys[i] = req.keey;
                     }
+                pickCardBackground(i);
             }
 
             function dothis(){
@@ -82,6 +83,7 @@
                         userReq.innerHTML = req.value;
                         keys.push(req.keey);
                     }
+                    pickCardBackground(i);
                 }  
             }
     </script>
@@ -109,14 +111,11 @@
     
     <section class="container-fluid row" id="requests">
         <div class="col card" id="card1">
-            <h1>
-                Write your response here!
-            </h1>
-            <p id="req1">the request of other users</p>
+            <p class="replytext" id="req1">the request of other users</p>
 
             <form onsubmit="writeResponse(keys[0], reply1); replace(0); return false" method="POST">
                 <div>
-                    <textarea name="reply1" id="reply1"></textarea>
+                    <textarea name="reply1" class="replytxtarea" id="reply1" placeholder="Write here!"></textarea>
                 </div>
                 <div>
                     <input type="submit" class="submit" value="Send" onclick="removeCard(this)" />
@@ -125,13 +124,10 @@
         </div>
 
         <div class="col card" id="card2">
-            <h1>
-                Write your response here!
-            </h1>
-            <p id="req2">the request of other users</p>
+            <p class="replytext" id="req2">the request of other users</p>
             <form onsubmit="writeResponse(keys[1], reply2); replace(1); return false" method="POST">
                 <div>
-                    <textarea name="reply2" id="reply2"></textarea>
+                    <textarea name="reply2" class="replytxtarea" id="reply2" placeholder="Write here!"></textarea>
                 </div>
                 <div>
                     <input type="submit" class="submit" value="Send" />
@@ -140,13 +136,10 @@
         </div>
 
         <div class="col card" id="card3">
-            <h1>
-                Write your response here!
-            </h1>
-            <p id="req3">the request of other users</p>
+            <p class="replytext" id="req3">the request of other users</p>
             <form onsubmit="writeResponse(keys[2], reply3); replace(2); return false" method="POST">
                 <div>
-                    <textarea name="reply3" id="reply3"></textarea>
+                    <textarea name="reply3" class="replytxtarea" id="reply3" placeholder="Write here!"></textarea>
                 </div>
                 <div>
                     <input type="submit" class="submit" value="Send" />
