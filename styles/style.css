@@ -282,3 +282,14 @@ h1.entry {
   height: 35px;
   width: 250px;
 }
+
+.aboutshell {
+  justify-content: right;
+  align-items: right;
+  background-color: lightblue;
+  border-radius: 20px;
+  
+  margin-left: 80px;
+  margin-right:80px;
+  padding: 30px;
+}

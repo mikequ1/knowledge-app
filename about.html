@@ -37,15 +37,54 @@
 
     <link rel="stylesheet" href="./styles/style.css">
 
-    <script>
-        var keys = [];
-
-        function loadpage(){
-            var cardParent = document.getElementById("requests");
-            console.log("loaded page");
-        }
-    </script>
 </head>
 <body>
+    <h1 style="text-align: center; font-size: 65px;"> E-Lightenment</h1>
     <h1 style="text-align: center;">About Us</h1>
+
+    <div class="aboutshell">
+    <h3> Elevator pitch </h3>
+    <p>
+        Tired of subreddits that only serve as echo chambers? If so, we bring to you E-lightenment! E-lightenment exposes its users to new perspectives through its randomized selection of articles and posts. 
+    </p>
+    <h3>Project Story</h3>
+    <p style="text-align: left;">
+        <b>What inspired us?</b> <br>
+            Facing an increasingly polarized American society, we thought of the idea of providing users
+        with articles presenting varying perspectives on a particular topic (ex: communism). We believe 
+        that this encourages civil discussion among users and help them gain a much more nuanced and comprehensive
+        understanding of a particular societal issue, contributing to the spread of knowledge among the public.
+        
+        <b>What it does?</b> <br>
+            It allows users to post their thoughts on featured articles. Users also have the option of responding
+           to the posts of other users.
+        <b>How we built it?</b> <br>
+We built the app using web API''s  HTML/CSS for the user interface. We used web API's to fetch data from Wikipedia and provide users with articles. 
+        <b>Challenges we ran into?</b> <br>
+            The main challenges we ran into were on the server side with integrating our python machine learning code with our HTML/JavaScript front end.
+            Oftentimes, the local test servers fails to run and keep producing a number of strange errors despite following documentation exactly.
+            We were able to find workarounds in some cases like extracting a file to be hosted on a different website.
+            But in many cases, we are unable to integrate our completed python backend with our front end, leaving some functionalities we initially intended unable to be realized.
+            <br>
+        <b>What we learned?</b> <br> 
+            Throughout the project, we were able to gain a significantly better understanding in client-side internet technologies and development using HTML, CSS and Javascript.
+            We also got a profound exposure into firebase's authentication and realtime database features.
+             
+            The text-filtering part of this project also got us very interested in the field of artificial intelligence and machine learning. 
+            And although we can only run our final ML product independently from our front end, 
+            we learned a lot about networking and server connection/communication throughout our trial-and-errors that lasted days.
+            <br>
+        <b>What's next for E-lightenment?</b> <br>
+        While we originally intended to implement a text-filtering feature that would use machine learning to analyze and give feedback on whether a post was polite or not, we had issues integrating the python with our HTML and JavaScript. 
+        As such, the next step for E-lightenment would naturally be this text-filtering feature. 
+
+        We were also planning to implement a point system that would reward users based on the politeness of their posts. 
+        However, because our plans for the text-filtering fell through, the point system unfortunately fell through as well. We plan to develop this point system once we figure out the text-filtering.         
+    </p>
+    <h3>Built with: </h3>
+    <p>
+        HTML, CSS, Javascript, Python, Firebase, Machine learning, wikipedia API, AJAX, bootstrp, 
+    </p>
+    </div>boot
+
 </body>
